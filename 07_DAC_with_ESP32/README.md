@@ -1,32 +1,62 @@
-# _Sample project_
+# 🔊 Conversor Digital-Analógico (DAC) - ESP32
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 📋 Descripción
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Este ejemplo demuestra cómo utilizar el Convertidor Digital-Analógico (DAC) integrado en el ESP32. El DAC convierte señales digitales en señales analógicas, permitiendo generar formas de onda o niveles de voltaje controlados por software. En este ejemplo, se genera una señal de rampa ascendente y descendente en el canal 1 del DAC (GPIO25).
 
+## 🛠️ Hardware Requerido
 
+- Placa de desarrollo ESP32 (con DAC integrado)
+- Osciloscopio o multímetro para medir la señal de salida (opcional)
+- Cable de conexión (si se desea conectar a un circuito externo)
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## 🔌 Conexiones
 
-## Example folder contents
+- **Salida DAC**:
+  - Canal 1 (GPIO25) → Conectar a un osciloscopio o multímetro
+  - GND → Tierra del osciloscopio/multímetro
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+> **Nota**: El ESP32 tiene dos canales DAC:
+> - Canal 1: GPIO25 (DAC1)
+> - Canal 2: GPIO26 (DAC2)
+> Este ejemplo utiliza solo el Canal 1.
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+## 📊 Especificaciones del DAC
 
-Below is short explanation of remaining files in the project folder.
+- **Resolución**: 8 bits (0-255)
+- **Rango de voltaje de salida**: 0V a 3.3V
+- **Canales**: 2 (DAC1 en GPIO25 y DAC2 en GPIO26)
+- **Frecuencia de actualización**: Depende del código (en este ejemplo, ~20Hz)
+
+## 🚀 Cómo usar
+
+1. Realiza las conexiones como se describe arriba
+2. Navega a este directorio
+3. Configura el proyecto: `idf.py menuconfig`
+4. Compila y flashea: `idf.py build flash monitor`
+5. Observa la señal en el osciloscopio o el voltaje en el multímetro
+
+## 📈 Comportamiento Esperado
+
+- La salida del DAC generará una señal de rampa que sube de 0 a 3.3V y luego baja de 3.3V a 0V de forma continua.
+- Cada paso de la rampa tendrá una duración de 50ms.
+- En el monitor serie se mostrarán los valores digitales (0-255) que se están enviando al DAC.
+
+## 📁 Estructura del Proyecto
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+07_DAC_with_ESP32/
+├── CMakeLists.txt      # Configuración principal de CMake
+├── main/
+│   ├── CMakeLists.txt # Configuración del componente principal
+│   └── main.c         # Código fuente principal
+└── README.md          # Este archivo
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver [LICENSE](../../LICENSE) para más detalles.
+
+---
+
+*Nota: Se recomienda (aunque no es obligatorio) que las obras derivadas mantengan este mismo espíritu de código libre y abierto, especialmente cuando se utilicen con fines educativos o de investigación.*

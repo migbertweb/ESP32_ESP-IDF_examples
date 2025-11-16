@@ -1,32 +1,60 @@
-# _Sample project_
+# ⏱️ Temporizador con Interrupción - ESP32
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 📋 Descripción
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Este ejemplo demuestra cómo utilizar el temporizador de hardware del ESP32 para generar interrupciones periódicas. El temporizador incrementa un contador cada 10 milisegundos (10,000 microsegundos) y muestra el valor actual del contador a través del puerto serie. Este es un ejemplo fundamental para comprender cómo programar tareas que deben ejecutarse en intervalos regulares sin bloquear el bucle principal.
 
+## 🛠️ Hardware Requerido
 
+- Placa de desarrollo ESP32
+- Cable USB para programación y alimentación
+- Computadora con puerto USB y terminal serie
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## 🔌 Conexiones
 
-## Example folder contents
+Este ejemplo no requiere conexiones externas ya que utiliza únicamente las capacidades internas del ESP32. El contador se muestra a través del puerto serie.
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+## 🚀 Cómo usar
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+1. Conecta tu placa ESP32 al puerto USB de tu computadora
+2. Navega a este directorio
+3. Configura el proyecto: `idf.py menuconfig`
+4. Compila y flashea: `idf.py build flash monitor`
+5. Observa cómo se incrementa el contador en el monitor serie
 
-Below is short explanation of remaining files in the project folder.
+## ⚙️ Configuración del Temporizador
+
+- **Período**: 10,000 microsegundos (10ms)
+- **Modo**: Periódico (se repite automáticamente)
+- **Resolución**: 1 microsegundo (máxima precisión)
+- **Contador**: Entero sin signo de 16 bits (0-65535)
+
+## 📊 Salida Esperada
+
+Verás una secuencia de números incrementándose en el monitor serie:
+```
+1
+2
+3
+...
+```
+Cada número se incrementa cada 10ms.
+
+## 📁 Estructura del Proyecto
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+05_Timer_Interrupt_Count/
+├── CMakeLists.txt      # Configuración principal de CMake
+├── main/
+│   ├── CMakeLists.txt # Configuración del componente principal
+│   └── main.c         # Código fuente principal
+└── README.md          # Este archivo
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver [LICENSE](../../LICENSE) para más detalles.
+
+---
+
+*Nota: Se recomienda (aunque no es obligatorio) que las obras derivadas mantengan este mismo espíritu de código libre y abierto, especialmente cuando se utilicen con fines educativos o de investigación.*

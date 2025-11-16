@@ -1,32 +1,46 @@
-# _Sample project_
+# 🚦 LED Blink - Ejemplo Básico
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 📋 Descripción
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Este ejemplo demuestra cómo hacer parpadear un LED conectado al pin GPIO2 del ESP32. Es el "Hola Mundo" de la programación embebida y sirve como punto de partida para aprender a controlar pines GPIO.
 
+## 🛠️ Hardware Requerido
 
+- Placa de desarrollo ESP32
+- LED (opcional, ya que la mayoría de las placas tienen un LED integrado en el pin 2)
+- Resistencia de 220Ω (si se usa un LED externo)
+- Cables de conexión (si se usa un LED externo)
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## 🔌 Conexiones
 
-## Example folder contents
+- LED integrado: Ya conectado al pin GPIO2 en la mayoría de las placas ESP32
+- Para LED externo:
+  - Ánodo del LED → Resistencia 220Ω → Pin GPIO2
+  - Cátodo del LED → GND
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+## 🚀 Cómo usar
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+1. Conecta tu placa ESP32
+2. Navega a este directorio
+3. Configura el proyecto: `idf.py menuconfig`
+4. Compila y flashea: `idf.py build flash monitor`
+5. Observa el LED parpadeando con un intervalo de 1 segundo
 
-Below is short explanation of remaining files in the project folder.
+## 📁 Estructura del Proyecto
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+01_Led_Blink/
+├── CMakeLists.txt      # Configuración principal de CMake
+├── main/
+│   ├── CMakeLists.txt # Configuración del componente principal
+│   └── main.c         # Código fuente principal
+└── README.md          # Este archivo
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver [LICENSE](../../LICENSE) para más detalles.
+
+---
+
+*Nota: Se recomienda (aunque no es obligatorio) que las obras derivadas mantengan este mismo espíritu de código libre y abierto, especialmente cuando se utilicen con fines educativos o de investigación.*

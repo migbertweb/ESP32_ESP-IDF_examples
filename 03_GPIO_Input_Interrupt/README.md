@@ -1,32 +1,55 @@
-# _Sample project_
+# 🎯 Interrupción por GPIO - Ejemplo Avanzado
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 📋 Descripción
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Este ejemplo demuestra cómo utilizar interrupciones por hardware en el ESP32. Cuando se presiona un botón conectado a un pin configurado para interrupciones, se incrementa un contador y se muestra su valor por el puerto serie. Este método es más eficiente que el polling (como en el ejemplo anterior) ya que el microcontrolador puede estar en modo de bajo consumo mientras espera el evento.
 
+## 🛠️ Hardware Requerido
 
+- Placa de desarrollo ESP32
+- 1x Pulsador o botón táctil
+- 1x Resistencia de 10kΩ (pull-down)
+- Cables de conexión
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## 🔌 Conexiones
 
-## Example folder contents
+- **Botón**:
+  - Un extremo → Pin GPIO5
+  - Otro extremo → 3.3V
+  - Resistencia de 10kΩ entre GPIO5 y GND (pull-down)
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+> **Nota**: El botón usa una resistencia pull-up interna, por lo que la conexión se simplifica.
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+## 🚀 Cómo usar
 
-Below is short explanation of remaining files in the project folder.
+1. Realiza las conexiones como se describe arriba
+2. Navega a este directorio
+3. Configura el proyecto: `idf.py menuconfig`
+4. Compila y flashea: `idf.py build flash monitor`
+5. Presiona el botón y observa cómo se incrementa el contador en el monitor serie
+
+## 📊 Características del Código
+
+- Configuración de interrupción por flanco de subida (GPIO_INTR_POSEDGE)
+- Uso de IRAM_ATTR para la rutina de servicio de interrupción (ISR)
+- Contador de interrupciones global
+- Manejo de rebotes mediante variable de estado
+
+## 📁 Estructura del Proyecto
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+03_GPIO_Input_Interrupt/
+├── CMakeLists.txt      # Configuración principal de CMake
+├── main/
+│   ├── CMakeLists.txt # Configuración del componente principal
+│   └── main.c         # Código fuente principal
+└── README.md          # Este archivo
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver [LICENSE](../../LICENSE) para más detalles.
+
+---
+
+*Nota: Se recomienda (aunque no es obligatorio) que las obras derivadas mantengan este mismo espíritu de código libre y abierto, especialmente cuando se utilicen con fines educativos o de investigación.*

@@ -1,32 +1,54 @@
-# _Sample project_
+# 📊 Conversión Analógico-Digital (ADC) - ESP32
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 📋 Descripción
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Este ejemplo demuestra cómo utilizar el módulo ADC (Convertidor Analógico-Digital) integrado en el ESP32. Lee valores de voltaje de un pin analógico (ADC1_CHANNEL_0 - GPIO36) y los muestra a través del puerto serie. El ADC del ESP32 tiene una resolución de 12 bits (0-4095) y puede medir voltajes de 0V a 3.3V.
 
+## 🛠️ Hardware Requerido
 
+- Placa de desarrollo ESP32
+- 1x Potenciómetro de 10kΩ o cualquier sensor analógico
+- Cables de conexión
+- Protoboard (opcional)
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## 🔌 Conexiones
 
-## Example folder contents
+- **Potenciómetro**:
+  - Patilla central → GPIO36 (ADC1_CHANNEL_0)
+  - Patilla lateral → 3.3V
+  - Otra patilla lateral → GND
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+> **Nota**: Si usas un sensor analógico, conecta la salida al pin GPIO36, VCC a 3.3V y GND a tierra.
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+## 🚀 Cómo usar
 
-Below is short explanation of remaining files in the project folder.
+1. Realiza las conexiones como se describe arriba
+2. Navega a este directorio
+3. Configura el proyecto: `idf.py menuconfig`
+4. Compila y flashea: `idf.py build flash monitor`
+5. Gira el potenciómetro y observa cómo cambian los valores en el monitor serie
+
+## 📊 Interpretación de los Valores
+
+- **0**: 0V
+- **2048**: ~1.65V (mitad del rango)
+- **4095**: 3.3V (máximo)
+
+## 📁 Estructura del Proyecto
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+04_ADC_ESP32/
+├── CMakeLists.txt      # Configuración principal de CMake
+├── main/
+│   ├── CMakeLists.txt # Configuración del componente principal
+│   └── main.c         # Código fuente principal
+└── README.md          # Este archivo
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver [LICENSE](../../LICENSE) para más detalles.
+
+---
+
+*Nota: Se recomienda (aunque no es obligatorio) que las obras derivadas mantengan este mismo espíritu de código libre y abierto, especialmente cuando se utilicen con fines educativos o de investigación.*

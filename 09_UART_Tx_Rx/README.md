@@ -1,32 +1,74 @@
-# _Sample project_
+# 📡 Comunicación UART - ESP32
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 📋 Descripción
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Este ejemplo demuestra cómo configurar y utilizar el periférico UART (Universal Asynchronous Receiver/Transmitter) del ESP32 para comunicación serie bidireccional. El ejemplo envía un mensaje a través del puerto UART2 y está configurado para recibir datos del mismo puerto.
 
+## 🛠️ Hardware Requerido
 
+- Placa de desarrollo ESP32
+- Cable USB para programación y comunicación serial
+- Opcional: Adaptador USB a UART (como FTDI) si se desea conectar a otro dispositivo
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## 🔌 Conexiones
 
-## Example folder contents
+El ejemplo utiliza el UART2 del ESP32 con los siguientes pines por defecto:
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+- **UART2_TX**: GPIO17 (pin de transmisión)
+- **UART2_RX**: GPIO16 (pin de recepción)
+- **GND**: Conexión a tierra común
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+> **Nota**: Para probar la comunicación UART, puedes conectar estos pines a un adaptador USB-UART o a otro microcontrolador con UART.
 
-Below is short explanation of remaining files in the project folder.
+## ⚙️ Configuración UART
+
+- **Baud Rate**: 9600 bps
+- **Bits de datos**: 8 bits
+- **Paridad**: Sin paridad
+- **Bits de parada**: 1 bit
+- **Control de flujo**: Deshabilitado
+- **Buffer de recepción**: 1024 bytes
+
+## 🚀 Cómo usar
+
+1. Realiza las conexiones necesarias según la sección anterior
+2. Navega a este directorio
+3. Configura el proyecto: `idf.py menuconfig`
+4. Compila y flashea: `idf.py build flash monitor`
+5. Abre un monitor serie en el puerto USB de la placa ESP32
+6. El programa enviará el mensaje "Hi I am from ESP32" cada 500ms
+7. Cualquier dato recibido se mostrará en el monitor serie
+
+## 📊 Comportamiento Esperado
+
+- El programa enviará continuamente el mensaje "Hi I am from ESP32" a través del UART2
+- Cualquier dato recibido en el UART2 se mostrará en el monitor serie
+- El formato de salida será: "Length: X, Data: [datos_recibidos]"
+
+## 🔄 Conexión con un PC
+
+Para probar la comunicación con una computadora:
+
+1. Conecta el pin TX del ESP32 (GPIO17) al pin RX del adaptador USB-UART
+2. Conecta el pin RX del ESP32 (GPIO16) al pin TX del adaptador USB-UART
+3. Asegúrate de conectar las tierras (GND) juntas
+4. Abre un terminal serie (como PuTTY o screen) configurado a 9600 baudios
+
+## 📁 Estructura del Proyecto
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+09_UART_Tx_Rx/
+├── CMakeLists.txt      # Configuración principal de CMake
+├── main/
+│   ├── CMakeLists.txt # Configuración del componente principal
+│   └── main.c         # Código fuente principal
+└── README.md          # Este archivo
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver [LICENSE](../../LICENSE) para más detalles.
+
+---
+
+*Nota: Se recomienda (aunque no es obligatorio) que las obras derivadas mantengan este mismo espíritu de código libre y abierto, especialmente cuando se utilicen con fines educativos o de investigación.*
